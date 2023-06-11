@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Ford Regular";
+    src: url("./fonts/ford-antenna-cond-regular-52e873e1cda1a2ff677ce97e38481f292eac4c01b4f0684aca818e36e0c6047e.woff");
+  }
+  @font-face {
+    font-family: "Ford Light";
+    src: url("./fonts/antenna-cond-light-771cddfd050348ce52ab05ba12d86530776361e660967df14356a5bd41b00636.woff");
+  }
+  @font-face {
+    font-family: "Ford Medium";
+    src: url("./fonts/ford-antenna-cond-medium-d94df510bf2ac861daef5ca3ad7f1936dbfde3cd746fd3e667e7b85fd9fb65ea.woff");
+  }
+
+  [type="text"],
+  [type="tel"],
+  [type="datetime-local"],
+  select,
+  [type="email"] {
+    @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-fordBlue focus:ring-fordBlue placeholder:text-slate-400;
+  }
+
+  [type="checkbox"] {
+    @apply border-gray-300 rounded shadow-sm focus:border-fordBlue focus:ring-fordBlue placeholder:text-slate-400;
+  }
+
+  select option {
+    @apply text-slate-400;
+  }
+}
