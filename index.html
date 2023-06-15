@@ -173,7 +173,13 @@
                 <div class="mt-4">
                     <label for="Name" class="tracking-wider text-gray-400">Име</label>
                     <div>
-                        <input type="text" name="Name" placeholder="Иван Петров" required>
+                        <input type="text" name="Name" placeholder="Иван" required>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="Familia" class="tracking-wider text-gray-400">Фамилия</label>
+                    <div>
+                        <input type="text" name="Familia" placeholder="Петров" required>
                     </div>
                 </div>
                 <div class="mt-4">
@@ -185,7 +191,7 @@
                 <div class="mt-4">
                     <label for="Phone" class="tracking-wider text-gray-400">Телефон</label>
                     <div>
-                        <input type="tel" name="Phone" placeholder="+359123456789" required>
+                        <input type="tel" name="Phone" placeholder="+359123456789">
                     </div>
                 </div>
                 <p class="mt-8 text-2xl uppercase">Маркетинг комуникация от Ford България</p>
@@ -489,11 +495,11 @@
                 body: data,
             })
             .then(() => {
-                fetch('https://sale.ford.bg/new-electric-explorer/mailsender.php', {
+                fetch('mailsender.php', {
                 method: 'POST',
                 body: data,
                 }).then(() => {
-                    window.location.href = "https://sale.ford.bg/new-electric-explorer/thankyou.html";
+                    window.location.href = "thankyou.html";
                 })
             })
         });

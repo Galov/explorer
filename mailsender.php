@@ -1,4 +1,36 @@
 <?php
+require_once 'vendor/autoload.php';
+
+function addContactToAudience($fname, $lname, $phone, $email)
+{
+
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => '834894a9ae482f4a7578124759c2ff37',
+        'server' => 'us13',
+    ]);
+
+    $list_id = "074b6944b8";
+
+    try {
+        $response = $mailchimp->lists->addListMember($list_id, [
+            "email_address" => $email,
+            "status" => "subscribed",
+            "merge_fields" => [
+                "FNAME" => $fname,
+                "LNAME" => $lname,
+                "PHONE" => $phone,
+                "EMAIL" => $email,
+            ],
+        ]);
+        // print_r($response);
+        return true;
+    } catch (MailchimpMarketing\ApiException $e) {
+        // echo $e->getMessage();
+        return false;
+    }
+}
 
 
 if(!$_POST) exit;
@@ -12,6 +44,7 @@ if (!defined("PHP_EOL")) define("PHP_EOL", "\r\n");
 
 $name     = $_POST['Name'];
 $email    = $_POST['Email'];
+$familyName = $_POST['Familia'];
 
 $comments = '';
 $comments .= 'Име: ' . $_POST['Name'] . PHP_EOL;
@@ -30,9 +63,9 @@ if(trim($name) == '') {
 	exit();
 }
 
-if(get_magic_quotes_gpc()) {
-	$comments = stripslashes($comments);
-}
+// if(get_magic_quotes_gpc()) {
+// 	$comments = stripslashes($comments);
+// }
 
 
 // Configuration option.
@@ -71,7 +104,7 @@ $headers .= "Content-type: text/html; charset=utf-8" . PHP_EOL;
 $headers .= "Content-Transfer-Encoding: quoted-printable" . PHP_EOL;
 
 
-if(mail($address, $e_subject, $msg, $headers)) {
+if(addContactToAudience($name, $familyName, $_POST['Phone'], $email)) {
 
 	// Email has sent successfully, echo a success page.
 
